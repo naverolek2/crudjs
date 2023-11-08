@@ -14,5 +14,21 @@ async function connect() {
     catch(e) {
         console.log("Błąd: " + e);
     }
+
+    
 }
-module.exports = {connect};
+
+
+async function getAllListing(client) {
+    const coll = await client.db('sample_airbnb').collection('listingsAndReviews');
+    let list = coll.find().toArray();
+
+    return list;
+}
+function close(client) {
+    client.close();
+    console.log("Odłączono od bazy");
+}
+
+module.exports = {connect, getAllListing, close};
+

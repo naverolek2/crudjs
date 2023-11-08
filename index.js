@@ -7,11 +7,20 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/listAll", async (req, res) => {
-    res.header("200");
-    res.write("<h1>Lista wszystkich rekordów w bazie </h1>");
+    res.write("<h1>Lista wszystkich rekordow w bazie </h1>");
     const client = await db.connect();
+    res.write("<table>");
+    let list = await db.getAllListing(client);
+    list.forEach(element => {
+        res.write("<tr>");
+        res.write("<td>" + element.name + "</td>" + "<td>"+ element.name +"</td>")
+    });
+    res.write("</table>")
+    //res.write(list);
+    db.close(client);
     res.end();
 })
+
 
 
 
