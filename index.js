@@ -11,9 +11,11 @@ app.get("/listAll", async (req, res) => {
     const client = await db.connect();
     res.write("<table>");
     let list = await db.getAllListing(client);
+    res.write("<tr>" + "<th>"+ "Nazwa" +"</th>" + "<th>"+ "url" +"</th>" + "</tr>")
     list.forEach(element => {
         res.write("<tr>");
-        res.write("<td>" + element.name + "</td>" + "<td>"+ element.name +"</td>")
+        res.write("<td>" + element.name + "</td>" + "<td>"+ element.listing_url +"</td>")
+        res.write("</tr>");
     });
     res.write("</table>")
     //res.write(list);
